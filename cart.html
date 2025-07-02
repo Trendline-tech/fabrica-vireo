@@ -1,12 +1,15 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Your Cart - Fabrica Vireo</title>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
   <script>
+    function saveCart(cart) {
+      localStorage.setItem('cart', JSON.stringify(cart));
+    }
+
     function loadCart() {
       const cart = JSON.parse(localStorage.getItem('cart')) || [];
       const cartContainer = document.getElementById('cart-items');
@@ -21,19 +24,46 @@
 
       cartContainer.innerHTML = '';
       cart.forEach((item, index) => {
-        total += item.price;
+        total += item.price * item.quantity;
         cartContainer.innerHTML += `
-          <div class="flex justify-between items-center border-b py-2">
-            <span>${item.name}</span>
-            <span class="font-semibold text-green-600">P${item.price}</span>
+          <div class="flex justify-between items-center border-b py-2 space-x-4">
+            <span class="flex-1">${item.name}</span>
+            <div class="flex items-center space-x-2">
+              <button onclick="decreaseQty(${index})" class="bg-gray-300 px-2 rounded hover:bg-gray-400">-</button>
+              <span>${item.quantity}</span>
+              <button onclick="increaseQty(${index})" class="bg-gray-300 px-2 rounded hover:bg-gray-400">+</button>
+            </div>
+            <span class="w-16 text-right font-semibold text-green-600">P${(item.price * item.quantity).toFixed(2)}</span>
+            <button onclick="removeItem(${index})" class="text-red-600 hover:text-red-800 font-bold">×</button>
           </div>
         `;
       });
-      totalDisplay.textContent = 'P' + total;
+      totalDisplay.textContent = 'P' + total.toFixed(2);
     }
 
-    function goToCheckout() {
-      window.location.href = 'checkout.html';
+    function increaseQty(index) {
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      cart[index].quantity++;
+      saveCart(cart);
+      loadCart();
+    }
+
+    function decreaseQty(index) {
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      if (cart[index].quantity > 1) {
+        cart[index].quantity--;
+      } else {
+        cart.splice(index, 1);
+      }
+      saveCart(cart);
+      loadCart();
+    }
+
+    function removeItem(index) {
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      cart.splice(index, 1);
+      saveCart(cart);
+      loadCart();
     }
 
     window.onload = loadCart;
@@ -51,5 +81,11 @@
   <div class="mt-6 text-right">
     <button onclick="goToCheckout()" class="bg-green-600 text-white px-6 py-2 rounded hover:bg-green-700">Proceed to Checkout</button>
   </div>
+
+  <script>
+    function goToCheckout() {
+      window.location.href = 'checkout.html';
+    }
+  </script>
 </body>
 </html>
