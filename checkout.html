@@ -1,49 +1,154 @@
 
-<section class="max-w-xl mx-auto p-6 bg-green-50 rounded shadow-md mt-8">
-  <h2 class="text-xl font-semibold mb-4 text-green-800">Checkout & Payment</h2>
-  
-  <p>Please make your payment to the bank account below:</p>
-  <ul class="list-disc pl-6 mb-4 text-green-700">
-    <li><strong>Bank:</strong> XYZ Bank</li>
-    <li><strong>Account Name:</strong> Fabrica Vireo</li>
-    <li><strong>Account Number:</strong> 1234567890</li>
-    <li><strong>Branch Code:</strong> 012345</li>
-  </ul>
-  
-  <p>After payment, please send your payment proof via WhatsApp at 
-    <a href="https://wa.me/26772614696" target="_blank" class="text-green-700 font-semibold">+267 7261 4696</a> 
-    or email 
-    <a href="mailto:destinytrends178@gmail.com" class="text-green-700 font-semibold">destinytrends178@gmail.com</a>.
-  </p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Fabrica Vireo - Checkout</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-white text-green-900 font-sans">
 
-  <form id="payment-form" class="mt-6" enctype="multipart/form-data" onsubmit="return handleSubmit(event)">
-    <label for="payment-proof" class="block mb-2 font-medium text-green-800">Upload Payment Proof (optional):</label>
-    <input type="file" id="payment-proof" name="payment-proof" accept="image/*" class="block w-full border rounded p-2 mb-4" />
-    
-    <button type="submit" class="bg-green-600 text-white px-6 py-2 rounded hover:bg-green-700">Submit Order</button>
-  </form>
-  
-  <p id="form-message" class="mt-4 text-green-700 font-semibold"></p>
-</section>
+  <!-- HEADER -->
+  <header class="border-b border-green-200 p-4">
+    <div class="max-w-6xl mx-auto flex flex-col items-center">
+      <h1 class="text-3xl font-bold text-green-700">Fabrica Vireo</h1>
+      <nav class="mt-2 space-x-6 text-green-700 text-lg font-medium">
+        <a href="index.html" class="hover:text-green-600">Home</a>
+        <a href="shop.html" class="hover:text-green-600">Shop</a>
+        <a href="#about" class="hover:text-green-600">About</a>
+        <a href="#contact" class="hover:text-green-600">Contact</a>
+      </nav>
+    </div>
+  </header>
 
-<script>
-  function handleSubmit(event) {
-    event.preventDefault();
-    
-    // Normally here you would send data to your server or storage
-    // Since you don't have backend, we'll just show a success message
-    
-    const fileInput = document.getElementById('payment-proof');
-    if (fileInput.files.length > 0) {
-      // You could add code here to validate or preview the file
+  <!-- MAIN CONTENT -->
+  <main class="max-w-6xl mx-auto p-6">
+
+    <!-- CART SECTION (placeholder) -->
+    <section id="cart" class="mb-10">
+      <h2 class="text-2xl font-semibold mb-4">Your Cart</h2>
+      <p class="text-green-700 italic">Products will appear here once added.</p>
+    </section>
+
+    <!-- CHECKOUT & PAYMENT -->
+    <section class="max-w-xl bg-green-50 rounded shadow-md p-6">
+      <h2 class="text-xl font-semibold mb-4 text-green-800">Checkout & Payment</h2>
+
+      <p>Please make your payment to the bank account below:</p>
+      <ul class="list-disc pl-6 mb-4 text-green-700">
+        <li><strong>Bank:</strong> XYZ Bank</li>
+        <li><strong>Account Name:</strong> Fabrica Vireo</li>
+        <li><strong>Account Number:</strong> 1234567890</li>
+        <li><strong>Branch Code:</strong> 012345</li>
+      </ul>
+
+      <p>After payment, please send your payment proof via WhatsApp at 
+        <a href="https://wa.me/26772614696" target="_blank" class="text-green-700 font-semibold">+267 7261 4696</a> 
+        or email 
+        <a href="mailto:destinytrends178@gmail.com" class="text-green-700 font-semibold">destinytrends178@gmail.com</a>.
+      </p>
+
+      <form id="payment-form" class="mt-6" enctype="multipart/form-data" onsubmit="return handleSubmit(event)">
+        <label for="payment-proof" class="block mb-2 font-medium text-green-800">Upload Payment Proof (optional):</label>
+        <input type="file" id="payment-proof" name="payment-proof" accept="image/*" class="block w-full border rounded p-2 mb-4" />
+
+        <button type="submit" class="bg-green-600 text-white px-6 py-2 rounded hover:bg-green-700">Submit Order</button>
+      </form>
+
+      <p id="form-message" class="mt-4 text-green-700 font-semibold"></p>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-green-50 border-t border-green-200 mt-16">
+    <div class="max-w-6xl mx-auto py-10 px-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 text-green-800 text-sm">
+
+      <!-- BRAND -->
+      <div>
+        <h4 class="text-lg font-semibold mb-4 text-green-700">Fabrica Vireo</h4>
+        <p>Trendy, affordable clothing and accessories built to inspire every day.</p>
+      </div>
+
+      <!-- LINKS -->
+      <div>
+        <h4 class="text-lg font-semibold mb-4">About</h4>
+        <ul class="space-y-2">
+          <li><a href="#about" class="hover:text-green-600">About Us</a></li>
+          <li><a href="#shop" class="hover:text-green-600">Shop</a></li>
+          <li><a href="#contact" class="hover:text-green-600">Contact</a></li>
+          <li><a href="#" class="hover:text-green-600">FAQ</a></li>
+        </ul>
+      </div>
+
+      <!-- SUPPORT -->
+      <div>
+        <h4 class="text-lg font-semibold mb-4">Customer Service</h4>
+        <ul class="space-y-2">
+          <li><a href="#" class="hover:text-green-600">Shipping & Returns</a></li>
+          <li><a href="#" class="hover:text-green-600">Size Guide</a></li>
+          <li><a href="#" class="hover:text-green-600">Track Order</a></li>
+          <li><a href="#" class="hover:text-green-600">Help</a></li>
+        </ul>
+      </div>
+
+      <!-- CONTACT WITH ICONS -->
+      <div>
+        <h4 class="text-lg font-semibold mb-4">Connect With Us</h4>
+        <ul class="space-y-3 text-sm">
+          <li class="flex items-center gap-2">
+            <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12H8m8 0l-4-4m4 4l-4 4" />
+            </svg>
+            <a href="mailto:destinytrends178@gmail.com" class="hover:text-green-600">Email Us</a>
+          </li>
+          <li class="flex items-center gap-2">
+            <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h1.4a1 1 0 01.9.6l1.4 3.2a1 1 0 01-.1 1l-1.6 2.2a11 11 0 005 5l2.2-1.6a1 1 0 011-.1l3.2 1.4a1 1 0 01.6.9V19a2 2 0 01-2 2h-1C8.82 21 3 15.18 3 8V5z" />
+            </svg>
+            <a href="tel:+26772614696" class="hover:text-green-600">+267 7261 4696</a>
+          </li>
+          <li class="flex items-center gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-green-600" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M20.52 3.48A11.79 11.79 0 0012.03.02C6.05.02 1.05 5 1.05 11c0 1.96.58 3.78 1.57 5.34L.03 23.06l6.93-1.8a11.8 11.8 0 005.07 1.15h.01c5.97 0 10.96-4.98 10.96-11.12 0-2.98-1.16-5.78-3.45-7.9zm-8.49 15.72a9.38 9.38 0 01-4.76-1.29l-.34-.2-4.17 1.08 1.12-4.08-.22-.35a9.15 9.15 0 01-1.41-4.92 9.26 9.26 0 0116.02-6.56 9.16 9.16 0 01-5.42 15.24zm5.27-6.42c-.29-.15-1.7-.84-1.96-.94-.26-.1-.45-.15-.64.15s-.73.94-.9 1.13c-.16.2-.32.22-.6.08a7.16 7.16 0 01-2.11-1.31 7.78 7.78 0 01-1.45-1.8c-.15-.26 0-.4.11-.53.11-.12.26-.3.39-.45a.78.78 0 00.26-.42.44.44 0 00-.03-.43c-.1-.26-.9-2.18-1.23-3-.32-.78-.65-.67-.89-.68a1.6 1.6 0 00-.52-.06 1.15 1.15 0 00-.87.4c-.3.33-1.14 1.12-1.14 2.73s1.17 3.17 1.34 3.39a11.26 11.26 0 0016.28 1.41c.72-.67 1.28-1.51 1.54-1.92a2.9 2.9 0 00-.05-1.78c-.08-.17-.26-.28-.54-.44z" />
+            </svg>
+            <a href="https://wa.me/26772614696" target="_blank" class="hover:text-green-600">WhatsApp Chat</a>
+          </li>
+          <li class="flex items-center gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+              <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z" />
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+            </svg>
+            <a href="https://www.instagram.com/fabrica.vireo" target="_blank" class="hover:text-green-600">Instagram</a>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="text-center text-green-600 text-xs py-4 border-t border-green-200">
+      &copy; 2025 Fabrica Vireo. All rights reserved.
+    </div>
+  </footer>
+
+  <script>
+    function handleSubmit(event) {
+      event.preventDefault();
+
+      const fileInput = document.getElementById('payment-proof');
+      if (fileInput.files.length > 0) {
+        // Optional: add file validation here
+      }
+
+      document.getElementById('form-message').textContent =
+        'Thank you! Your order has been submitted. We will contact you soon to confirm your payment.';
+
+      event.target.reset();
+      return false;
     }
-    
-    document.getElementById('form-message').textContent = 
-      'Thank you! Your order has been submitted. We will contact you soon to confirm your payment.';
-    
-    // Reset form
-    event.target.reset();
-    
-    return false; // prevent actual form submission
-  }
-</script>
+  </script>
+
+</body>
+</html>
