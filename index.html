@@ -7,13 +7,17 @@
   <title>Fabrica Vireo</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <script>
-    let cart = JSON.parse(localStorage.getItem('cart')) || [];
-    function addToCart(product) {
-      cart.push(product);
-      localStorage.setItem('cart', JSON.stringify(cart));
-      alert(product.name + " added to cart!");
+  function updateCartCount() {
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const totalQuantity = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
+    const cartCountElem = document.getElementById('cart-count');
+    if (cartCountElem) {
+      cartCountElem.textContent = totalQuantity;
+      cartCountElem.style.display = totalQuantity > 0 ? 'flex' : 'none';
     }
-  </script>
+  }
+  window.onload = updateCartCount;
+</script>
 </head>
 <body class="bg-white text-gray-800 font-sans">
   <!-- Navbar -->
