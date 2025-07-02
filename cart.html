@@ -6,87 +6,178 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Your Cart - Fabrica Vireo</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+  <style>
+    /* Quantity box styling */
+    .qty-box {
+      width: 40px;
+      text-align: center;
+      border: 1px solid #cbd5e1; /* Tailwind gray-300 */
+      border-radius: 4px;
+      font-weight: 600;
+    }
+    .qty-btn {
+      cursor: pointer;
+      user-select: none;
+      padding: 4px 8px;
+      background-color: #d1fae5; /* Tailwind green-100 */
+      border-radius: 4px;
+      font-weight: bold;
+      color: #065f46; /* Tailwind green-800 */
+      transition: background-color 0.2s;
+    }
+    .qty-btn:hover {
+      background-color: #34d399; /* Tailwind green-400 */
+      color: white;
+    }
+  </style>
+</head>
+<body class="bg-white text-gray-800 font-sans p-6">
+
+  <!-- Navbar with cart count badge -->
+  <header class="shadow-md py-4 px-6 flex justify-between items-center mb-8">
+    <h1 class="text-2xl font-bold text-green-600">Fabrica Vireo</h1>
+    <nav class="space-x-4 relative">
+      <a href="index.html" class="hover:text-green-600">Home</a>
+      <a href="#shop" class="hover:text-green-600">Shop</a>
+      <a href="#about" class="hover:text-green-600">About</a>
+      <a href="#contact" class="hover:text-green-600">Contact</a>
+      <a href="cart.html" class="hover:text-green-600 font-semibold relative">
+        🛒 Cart
+        <span id="cart-count" class="absolute -top-2 -right-3 bg-green-600 text-white rounded-full text-xs w-5 h-5 flex items-center justify-center" style="display:none;">0</span>
+      </a>
+    </nav>
+  </header>
+
+  <h1 class="text-3xl font-bold text-green-600 mb-6">Your Cart</h1>
+
+  <div id="cart-container" class="space-y-6">
+    <!-- Products will be loaded here dynamically -->
+  </div>
+
+  <!-- Cart Summary -->
+  <div class="mt-10 max-w-md mx-auto border-t pt-6">
+    <div class="flex justify-between mb-2">
+      <span class="font-semibold">Subtotal:</span>
+      <span id="subtotal" class="font-semibold">P0.00</span>
+    </div>
+    <div class="flex justify-between mb-2">
+      <span class="font-semibold">Discount (10%):</span>
+      <span id="discount" class="font-semibold text-red-600">P0.00</span>
+    </div>
+    <div class="flex justify-between text-xl font-bold border-t pt-2">
+      <span>Total:</span>
+      <span id="total">P0.00</span>
+    </div>
+  </div>
+
+  <div class="mt-6 max-w-md mx-auto text-right">
+    <button onclick="proceedToCheckout()" class="bg-green-600 text-white px-6 py-2 rounded hover:bg-green-700">Proceed to Checkout</button>
+  </div>
+
   <script>
+    // Save cart to localStorage
     function saveCart(cart) {
       localStorage.setItem('cart', JSON.stringify(cart));
     }
 
+    // Load cart from localStorage
     function loadCart() {
-      const cart = JSON.parse(localStorage.getItem('cart')) || [];
-      const cartContainer = document.getElementById('cart-items');
-      const totalDisplay = document.getElementById('cart-total');
-      let total = 0;
+      return JSON.parse(localStorage.getItem('cart')) || [];
+    }
+
+    // Update navbar cart count badge
+    function updateCartCount() {
+      const cart = loadCart();
+      const totalQuantity = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
+      const cartCountElem = document.getElementById('cart-count');
+      if (cartCountElem) {
+        cartCountElem.textContent = totalQuantity;
+        cartCountElem.style.display = totalQuantity > 0 ? 'flex' : 'none';
+      }
+    }
+
+    // Render cart items
+    function renderCart() {
+      const cart = loadCart();
+      const container = document.getElementById('cart-container');
+      container.innerHTML = '';
 
       if (cart.length === 0) {
-        cartContainer.innerHTML = '<p class="text-center">Your cart is empty.</p>';
-        totalDisplay.textContent = 'P0';
+        container.innerHTML = '<p class="text-center text-gray-600">Your cart is empty.</p>';
+        updateSummary(0);
+        updateCartCount();
         return;
       }
 
-      cartContainer.innerHTML = '';
       cart.forEach((item, index) => {
-        total += item.price * item.quantity;
-        cartContainer.innerHTML += `
-          <div class="flex justify-between items-center border-b py-2 space-x-4">
-            <span class="flex-1">${item.name}</span>
-            <div class="flex items-center space-x-2">
-              <button onclick="decreaseQty(${index})" class="bg-gray-300 px-2 rounded hover:bg-gray-400">-</button>
-              <span>${item.quantity}</span>
-              <button onclick="increaseQty(${index})" class="bg-gray-300 px-2 rounded hover:bg-gray-400">+</button>
+        const itemTotal = (item.price * item.quantity).toFixed(2);
+        const productDiv = document.createElement('div');
+        productDiv.className = 'flex flex-col md:flex-row items-center md:items-start md:space-x-6 border rounded p-4';
+
+        productDiv.innerHTML = `
+          <img src="${item.image || 'https://via.placeholder.com/100'}" alt="${item.name}" class="w-24 h-24 object-cover rounded mb-4 md:mb-0" />
+          <div class="flex-1">
+            <h3 class="text-lg font-semibold">${item.name}</h3>
+            <p class="text-green-600 font-semibold">P${item.price.toFixed(2)}</p>
+            <div class="flex items-center mt-2 space-x-2">
+              <button class="qty-btn" onclick="changeQuantity(${index}, -1)">−</button>
+              <input type="text" class="qty-box" value="${item.quantity}" readonly />
+              <button class="qty-btn" onclick="changeQuantity(${index}, 1)">+</button>
             </div>
-            <span class="w-16 text-right font-semibold text-green-600">P${(item.price * item.quantity).toFixed(2)}</span>
-            <button onclick="removeItem(${index})" class="text-red-600 hover:text-red-800 font-bold">×</button>
+            <button onclick="removeItem(${index})" class="mt-2 text-red-600 hover:text-red-800 font-semibold">Delete</button>
           </div>
+          <div class="text-lg font-semibold text-green-700 mt-2 md:mt-0">P${itemTotal}</div>
         `;
+
+        container.appendChild(productDiv);
       });
-      totalDisplay.textContent = 'P' + total.toFixed(2);
+
+      calculateSummary(cart);
+      updateCartCount();
     }
 
-    function increaseQty(index) {
-      let cart = JSON.parse(localStorage.getItem('cart')) || [];
-      cart[index].quantity++;
-      saveCart(cart);
-      loadCart();
-    }
+    // Change quantity for an item (delta can be +1 or -1)
+    function changeQuantity(index, delta) {
+      let cart = loadCart();
+      if (!cart[index]) return;
 
-    function decreaseQty(index) {
-      let cart = JSON.parse(localStorage.getItem('cart')) || [];
-      if (cart[index].quantity > 1) {
-        cart[index].quantity--;
-      } else {
+      let newQty = (cart[index].quantity || 1) + delta;
+      if (newQty < 1) {
+        // Remove if less than 1
         cart.splice(index, 1);
+      } else {
+        cart[index].quantity = newQty;
       }
+
       saveCart(cart);
-      loadCart();
+      renderCart();
     }
 
+    // Remove item entirely
     function removeItem(index) {
-      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      let cart = loadCart();
       cart.splice(index, 1);
       saveCart(cart);
-      loadCart();
+      renderCart();
     }
 
-    window.onload = loadCart;
-  </script>
-</head>
-<body class="bg-white text-gray-800 font-sans p-6">
-  <h1 class="text-3xl font-bold text-green-600 mb-4">Your Cart</h1>
+    // Calculate subtotal, discount, total and update the UI
+    function calculateSummary(cart) {
+      let subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+      let discount = subtotal * 0.10; // 10% discount example
+      let total = subtotal - discount;
 
-  <div id="cart-items" class="mb-6"></div>
+      document.getElementById('subtotal').textContent = `P${subtotal.toFixed(2)}`;
+      document.getElementById('discount').textContent = `P${discount.toFixed(2)}`;
+      document.getElementById('total').textContent = `P${total.toFixed(2)}`;
+    }
 
-  <div class="text-right text-xl font-semibold">
-    Total: <span id="cart-total">P0</span>
-  </div>
-
-  <div class="mt-6 text-right">
-    <button onclick="goToCheckout()" class="bg-green-600 text-white px-6 py-2 rounded hover:bg-green-700">Proceed to Checkout</button>
-  </div>
-
-  <script>
-    function goToCheckout() {
+    function proceedToCheckout() {
       window.location.href = 'checkout.html';
     }
+
+    // Initial rendering on page load
+    window.onload = renderCart;
   </script>
 </body>
 </html>
