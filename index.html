@@ -37,95 +37,108 @@
 
   <!-- SHOP SECTION -->
   <section id="shop" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 px-4 md:px-10 pb-16">
-    <!-- Example Product -->
-    <div class="product-card border p-4 rounded-lg shadow-sm" data-name="green tee">
-      <img src="https://via.placeholder.com/200x200" alt="Green Tee" class="mb-4 rounded" />
-      <h4 class="text-xl font-medium">Green Tee</h4>
-      <p class="text-green-600 font-semibold">P120</p>
-      <button
-        onclick='addToCart({name:"Green Tee", price:120, image:"https://via.placeholder.com/200x200"})'
-        class="mt-2 bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
-      >
-
-        Add to Cart
-      </button>
-    </div>
-    <!-- More product cards can be added in the same format -->
+    <!-- Product items will be added via JavaScript -->
   </section>
 
-<!-- FOOTER WITH LIGHT GREEN BACKGROUND -->
-<footer class="bg-green-50 border-t border-green-200 mt-16">
-  <div class="max-w-6xl mx-auto py-10 px-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 text-green-800 text-sm">
-
-    <!-- BRAND -->
-    <div>
-      <h4 class="text-lg font-semibold mb-4 text-green-700">Fabrica Vireo</h4>
-      <p>Trendy, affordable clothing and accessories built to inspire every day.</p>
+  <!-- FOOTER -->
+  <footer class="bg-green-50 border-t border-green-200 mt-16">
+    <div class="max-w-6xl mx-auto py-10 px-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 text-green-800 text-sm">
+      <div>
+        <h4 class="text-lg font-semibold mb-4 text-green-700">Fabrica Vireo</h4>
+        <p>Trendy, affordable clothing and accessories built to inspire every day.</p>
+      </div>
+      <div>
+        <h4 class="text-lg font-semibold mb-4">Links</h4>
+        <ul class="space-y-2">
+          <li><a href="#about" class="hover:text-green-600">About Us</a></li>
+          <li><a href="#shop" class="hover:text-green-600">Shop</a></li>
+          <li><a href="#contact" class="hover:text-green-600">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="text-lg font-semibold mb-4">Contact</h4>
+        <ul class="space-y-2">
+          <li><a href="mailto:destinytrends178@gmail.com" class="hover:text-green-600">Email</a></li>
+          <li><a href="tel:+26772614696" class="hover:text-green-600">+267 7261 4696</a></li>
+        </ul>
+      </div>
     </div>
+    <div class="text-center text-green-600 text-xs py-4 border-t border-green-200">&copy; 2025 Fabrica Vireo. All rights reserved.</div>
+  </footer>
 
-    <!-- LINKS -->
-    <div>
-      <h4 class="text-lg font-semibold mb-4">About</h4>
-      <ul class="space-y-2">
-        <li><a href="#about" class="hover:text-green-600">About Us</a></li>
-        <li><a href="#shop" class="hover:text-green-600">Shop</a></li>
-        <li><a href="#contact" class="hover:text-green-600">Contact</a></li>
-        <li><a href="#" class="hover:text-green-600">FAQ</a></li>
-      </ul>
-    </div>
+  <script>
+    const products = [
+      { name: "Adidas Running Shoes", price: 550, image: "https://via.placeholder.com/200?text=Adidas+Shoes" },
+      { name: "Nike Air Force 1", price: 620, image: "https://via.placeholder.com/200?text=Nike+Airforce" },
+      { name: "Black Hoodie", price: 300, image: "https://via.placeholder.com/200?text=Black+Hoodie" },
+      { name: "White T-shirt", price: 150, image: "https://via.placeholder.com/200?text=White+Tee" },
+      { name: "Denim Jacket", price: 480, image: "https://via.placeholder.com/200?text=Denim+Jacket" },
+      { name: "Leather Jacket", price: 700, image: "https://via.placeholder.com/200?text=Leather+Jacket" },
+      { name: "Red Dress", price: 420, image: "https://via.placeholder.com/200?text=Red+Dress" },
+      { name: "Blue Jeans", price: 270, image: "https://via.placeholder.com/200?text=Blue+Jeans" },
+      { name: "Baseball Cap", price: 90, image: "https://via.placeholder.com/200?text=Cap" },
+      { name: "Sneakers", price: 360, image: "https://via.placeholder.com/200?text=Sneakers" },
+      { name: "Tracksuit", price: 450, image: "https://via.placeholder.com/200?text=Tracksuit" },
+      { name: "Crop Top", price: 130, image: "https://via.placeholder.com/200?text=Crop+Top" },
+      { name: "Summer Shorts", price: 180, image: "https://via.placeholder.com/200?text=Shorts" },
+      { name: "Joggers", price: 300, image: "https://via.placeholder.com/200?text=Joggers" },
+      { name: "Sweatshirt", price: 290, image: "https://via.placeholder.com/200?text=Sweatshirt" },
+      { name: "Canvas Shoes", price: 310, image: "https://via.placeholder.com/200?text=Canvas+Shoes" },
+      { name: "Polo Shirt", price: 250, image: "https://via.placeholder.com/200?text=Polo+Shirt" },
+      { name: "Trench Coat", price: 690, image: "https://via.placeholder.com/200?text=Trench+Coat" },
+      { name: "Sport Bra", price: 190, image: "https://via.placeholder.com/200?text=Sport+Bra" },
+      { name: "Bomber Jacket", price: 540, image: "https://via.placeholder.com/200?text=Bomber+Jacket" }
+    ];
 
-    <!-- SUPPORT -->
-    <div>
-      <h4 class="text-lg font-semibold mb-4">Customer Service</h4>
-      <ul class="space-y-2">
-        <li><a href="#" class="hover:text-green-600">Shipping & Returns</a></li>
-        <li><a href="#" class="hover:text-green-600">Size Guide</a></li>
-        <li><a href="#" class="hover:text-green-600">Track Order</a></li>
-        <li><a href="#" class="hover:text-green-600">Help</a></li>
-      </ul>
-    </div>
+    function addToCart(item) {
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      const index = cart.findIndex(p => p.name === item.name);
+      if (index >= 0) {
+        cart[index].quantity += 1;
+      } else {
+        cart.push({ ...item, quantity: 1 });
+      }
+      localStorage.setItem("cart", JSON.stringify(cart));
+      updateCartCount();
+      alert(item.name + " added to cart!");
+    }
 
-    <!-- CONTACT WITH ICONS -->
-    <div>
-      <h4 class="text-lg font-semibold mb-4">Connect With Us</h4>
-      <ul class="space-y-3 text-sm">
-        <li class="flex items-center gap-2">
-          <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12H8m8 0l-4-4m4 4l-4 4" />
-          </svg>
-          <a href="mailto:destinytrends178@gmail.com" class="hover:text-green-600">Email Us</a>
-        </li>
-        <li class="flex items-center gap-2">
-          <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h1.4a1 1 0 01.9.6l1.4 3.2a1 1 0 01-.1 1l-1.6 2.2a11 11 0 005 5l2.2-1.6a1 1 0 011-.1l3.2 1.4a1 1 0 01.6.9V19a2 2 0 01-2 2h-1C8.82 21 3 15.18 3 8V5z" />
-          </svg>
-          <a href="tel:+26772614696" class="hover:text-green-600">+267 7261 4696</a>
-        </li>
-        <li class="flex items-center gap-2">
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-green-600" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M20.52 3.48A11.79 11.79 0 0012.03.02C6.05.02 1.05 5 1.05 11c0 1.96.58 3.78 1.57 5.34L.03 23.06l6.93-1.8a11.8 11.8 0 005.07 1.15h.01c5.97 0 10.96-4.98 10.96-11.12 0-2.98-1.16-5.78-3.45-7.9zm-8.49 15.72a9.38 9.38 0 01-4.76-1.29l-.34-.2-4.17 1.08 1.12-4.08-.22-.35a9.15 9.15 0 01-1.41-4.92 9.26 9.26 0 0116.02-6.56 9.16 9.16 0 01-5.42 15.24zm5.27-6.42c-.29-.15-1.7-.84-1.96-.94-.26-.1-.45-.15-.64.15s-.73.94-.9 1.13c-.16.2-.32.22-.6.08a7.16 7.16 0 01-2.11-1.31 7.78 7.78 0 01-1.45-1.8c-.15-.26 0-.4.11-.53.11-.12.26-.3.39-.45a.78.78 0 00.26-.42.44.44 0 00-.03-.43c-.1-.26-.9-2.18-1.23-3-.32-.78-.65-.67-.89-.68a1.6 1.6 0 00-.52-.06 1.15 1.15 0 00-.87.4c-.3.33-1.14 1.12-1.14 2.73s1.17 3.17 1.34 3.39a11.26 11.26 0 0016.28 1.41c.72-.67 1.28-1.51 1.54-1.92a2.9 2.9 0 00-.05-1.78c-.08-.17-.26-.28-.54-.44z" />
-          </svg>
-          <a href="https://wa.me/26772614696" target="_blank" class="hover:text-green-600">WhatsApp Chat</a>
-        </li>
-        <li class="flex items-center gap-2">
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
-            <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z" />
-            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
-          </svg>
-          <a href="https://www.instagram.com/fabrica.vireo" target="_blank" class="hover:text-green-600">Instagram</a>
-        </li>
-      </ul>
-    </div>
+    function updateCartCount() {
+      const cart = JSON.parse(localStorage.getItem("cart")) || [];
+      const totalQuantity = cart.reduce((acc, item) => acc + (item.quantity || 1), 0);
+      const cartCount = document.getElementById("cart-count");
+      cartCount.style.display = totalQuantity > 0 ? "flex" : "none";
+      cartCount.textContent = totalQuantity;
+    }
 
-  </div>
+    function displayProducts() {
+      const shop = document.getElementById("shop");
+      shop.innerHTML = "";
+      products.forEach(product => {
+        shop.innerHTML += `
+          <div class="product-card border p-4 rounded-lg shadow-sm" data-name="${product.name.toLowerCase()}">
+            <img src="${product.image}" alt="${product.name}" class="mb-4 rounded w-full h-48 object-cover" />
+            <h4 class="text-xl font-medium">${product.name}</h4>
+            <p class="text-green-600 font-semibold">P${product.price}</p>
+            <button onclick='addToCart(${JSON.stringify(product)})' class="mt-2 bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">Add to Cart</button>
+          </div>
+        `;
+      });
+    }
 
-  <div class="text-center text-green-600 text-xs py-4 border-t border-green-200">
-    &copy; 2025 Fabrica Vireo. All rights reserved.
-  </div>
-</footer>
+    function filterProducts() {
+      const input = document.getElementById("search-input").value.toLowerCase();
+      document.querySelectorAll(".product-card").forEach(card => {
+        const name = card.getAttribute("data-name");
+        card.style.display = name.includes(input) ? "block" : "none";
+      });
+    }
 
-    &copy; 2025 Fabrica Vireo. All rights reserved.
-  </div>
-</footer>
+    window.onload = function () {
+      displayProducts();
+      updateCartCount();
+    }
+  </script>
 
+</body>
+</html>
