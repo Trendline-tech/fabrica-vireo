@@ -7,11 +7,10 @@
   <title>Your Cart - Fabrica Vireo</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
   <style>
-    /* Quantity box styling */
     .qty-box {
       width: 40px;
       text-align: center;
-      border: 1px solid #cbd5e1; /* Tailwind gray-300 */
+      border: 1px solid #cbd5e1;
       border-radius: 4px;
       font-weight: 600;
     }
@@ -19,21 +18,20 @@
       cursor: pointer;
       user-select: none;
       padding: 4px 8px;
-      background-color: #d1fae5; /* Tailwind green-100 */
+      background-color: #d1fae5;
       border-radius: 4px;
       font-weight: bold;
-      color: #065f46; /* Tailwind green-800 */
+      color: #065f46;
       transition: background-color 0.2s;
     }
     .qty-btn:hover {
-      background-color: #34d399; /* Tailwind green-400 */
+      background-color: #34d399;
       color: white;
     }
   </style>
 </head>
 <body class="bg-white text-gray-800 font-sans p-6">
 
-  <!-- Navbar with cart count badge -->
   <header class="shadow-md py-4 px-6 flex justify-between items-center mb-8">
     <h1 class="text-2xl font-bold text-green-600">Fabrica Vireo</h1>
     <nav class="space-x-4 relative">
@@ -55,19 +53,9 @@
   </div>
 
   <!-- Cart Summary -->
-  <div class="mt-10 max-w-md mx-auto border-t pt-6">
-    <div class="flex justify-between mb-2">
-      <span class="font-semibold">Subtotal:</span>
-      <span id="subtotal" class="font-semibold">P0.00</span>
-    </div>
-    <div class="flex justify-between mb-2">
-      <span class="font-semibold">Discount (10%):</span>
-      <span id="discount" class="font-semibold text-red-600">P0.00</span>
-    </div>
-    <div class="flex justify-between text-xl font-bold border-t pt-2">
-      <span>Total:</span>
-      <span id="total">P0.00</span>
-    </div>
+  <div class="mt-10 max-w-md mx-auto border-t pt-6 flex justify-between text-xl font-bold">
+    <span>Total:</span>
+    <span id="total">P0.00</span>
   </div>
 
   <div class="mt-6 max-w-md mx-auto text-right">
@@ -75,17 +63,14 @@
   </div>
 
   <script>
-    // Save cart to localStorage
     function saveCart(cart) {
       localStorage.setItem('cart', JSON.stringify(cart));
     }
 
-    // Load cart from localStorage
     function loadCart() {
       return JSON.parse(localStorage.getItem('cart')) || [];
     }
 
-    // Update navbar cart count badge
     function updateCartCount() {
       const cart = loadCart();
       const totalQuantity = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
@@ -96,7 +81,6 @@
       }
     }
 
-    // Render cart items
     function renderCart() {
       const cart = loadCart();
       const container = document.getElementById('cart-container');
@@ -132,18 +116,16 @@
         container.appendChild(productDiv);
       });
 
-      calculateSummary(cart);
+      calculateTotal(cart);
       updateCartCount();
     }
 
-    // Change quantity for an item (delta can be +1 or -1)
     function changeQuantity(index, delta) {
       let cart = loadCart();
       if (!cart[index]) return;
 
       let newQty = (cart[index].quantity || 1) + delta;
       if (newQty < 1) {
-        // Remove if less than 1
         cart.splice(index, 1);
       } else {
         cart[index].quantity = newQty;
@@ -153,7 +135,6 @@
       renderCart();
     }
 
-    // Remove item entirely
     function removeItem(index) {
       let cart = loadCart();
       cart.splice(index, 1);
@@ -161,12 +142,8 @@
       renderCart();
     }
 
-    // Calculate total and update the UI
-    function calculateSummary(cart) {
-      let total = price of items added
-
-      document.getElementById('subtotal').textContent = `P${subtotal.toFixed(2)}`;
-      document.getElementById('discount').textContent = `P${discount.toFixed(2)}`;
+    function calculateTotal(cart) {
+      let total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
       document.getElementById('total').textContent = `P${total.toFixed(2)}`;
     }
 
@@ -174,7 +151,6 @@
       window.location.href = 'checkout.html';
     }
 
-    // Initial rendering on page load
     window.onload = renderCart;
   </script>
 </body>
