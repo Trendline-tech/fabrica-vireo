@@ -1,0 +1,81 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fabrica Vireo</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <script>
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    function addToCart(product) {
+      cart.push(product);
+      localStorage.setItem('cart', JSON.stringify(cart));
+      alert(product.name + " added to cart!");
+    }
+  </script>
+</head>
+<body class="bg-white text-gray-800 font-sans">
+  <!-- Navbar -->
+  <header class="shadow-md py-4 px-6 flex justify-between items-center">
+    <h1 class="text-2xl font-bold text-green-600">Fabrica Vireo</h1>
+    <nav class="space-x-4">
+      <a href="#home" class="hover:text-green-600">Home</a>
+      <a href="#shop" class="hover:text-green-600">Shop</a>
+      <a href="#about" class="hover:text-green-600">About</a>
+      <a href="#contact" class="hover:text-green-600">Contact</a>
+      <a href="cart.html" class="hover:text-green-600 font-semibold">🛒 Cart</a>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="home" class="bg-green-50 py-20 text-center">
+    <h2 class="text-4xl font-bold mb-4">Style That Thrives</h2>
+    <p class="text-lg text-gray-600 mb-6">Clothes and accessories designed to flourish in every season.</p>
+    <a href="#shop" class="bg-green-600 text-white px-6 py-2 rounded-full hover:bg-green-700">Shop Now</a>
+  </section>
+
+  <!-- Shop Preview -->
+  <section id="shop" class="py-16 px-6">
+    <h3 class="text-3xl font-semibold mb-8 text-center">Featured Products</h3>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div class="border p-4 rounded-lg shadow-sm">
+        <img src="https://via.placeholder.com/300" alt="Product 1" class="mb-4">
+        <h4 class="text-xl font-medium">Green Tee</h4>
+        <p class="text-green-600 font-semibold">P120</p>
+        <button onclick='addToCart({name:"Green Tee", price:120})' class="mt-2 bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">Add to Cart</button>
+      </div>
+      <div class="border p-4 rounded-lg shadow-sm">
+        <img src="https://via.placeholder.com/300" alt="Product 2" class="mb-4">
+        <h4 class="text-xl font-medium">Canvas Tote</h4>
+        <p class="text-green-600 font-semibold">P95</p>
+        <button onclick='addToCart({name:"Canvas Tote", price:95})' class="mt-2 bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">Add to Cart</button>
+      </div>
+      <div class="border p-4 rounded-lg shadow-sm">
+        <img src="https://via.placeholder.com/300" alt="Product 3" class="mb-4">
+        <h4 class="text-xl font-medium">Floral Bandana</h4>
+        <p class="text-green-600 font-semibold">P65</p>
+        <button onclick='addToCart({name:"Floral Bandana", price:65})' class="mt-2 bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">Add to Cart</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about" class="bg-gray-100 py-16 px-6 text-center">
+    <h3 class="text-3xl font-semibold mb-4">About Fabrica Vireo</h3>
+    <p class="max-w-xl mx-auto text-gray-600">Fabrica Vireo is more than a store — it's a celebration of growth, style, and nature. We bring you affordable, beautiful pieces made to thrive with you.</p>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="py-16 px-6 text-center">
+    <h3 class="text-3xl font-semibold mb-4">Get in Touch</h3>
+    <p class="mb-4">Email: fabricavireo@gmail.com</p>
+    <p>WhatsApp: +267 71234567</p>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-green-600 text-white text-center py-4">
+    &copy; 2025 Fabrica Vireo. All rights reserved.
+  </footer>
+</body>
+</html>

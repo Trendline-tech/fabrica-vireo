@@ -1,0 +1,41 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout - Fabrica Vireo</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-white text-gray-800 font-sans p-6">
+  <h1 class="text-3xl font-bold text-green-600 mb-4">Checkout</h1>
+
+  <form onsubmit="handleCheckout(event)" class="space-y-4 max-w-lg">
+    <input required type="text" name="name" placeholder="Full Name" class="w-full border p-2 rounded" />
+    <input required type="tel" name="phone" placeholder="Phone Number" class="w-full border p-2 rounded" />
+    <textarea required name="address" placeholder="Delivery Address" class="w-full border p-2 rounded"></textarea>
+
+    <p class="text-sm text-gray-500">You will receive payment details via WhatsApp or SMS. Orders confirmed after payment.</p>
+
+    <button type="submit" class="bg-green-600 text-white px-6 py-2 rounded hover:bg-green-700">Place Order</button>
+  </form>
+
+  <script>
+    function handleCheckout(event) {
+      event.preventDefault();
+      const form = event.target;
+      const orderDetails = {
+        name: form.name.value,
+        phone: form.phone.value,
+        address: form.address.value,
+        cart: JSON.parse(localStorage.getItem('cart')) || []
+      };
+
+      // For now, just show order details in alert (you'll replace with WhatsApp or email later)
+      alert('Order placed! We will contact you soon.');
+      localStorage.removeItem('cart');
+      window.location.href = 'index.html';
+    }
+  </script>
+</body>
+</html>
