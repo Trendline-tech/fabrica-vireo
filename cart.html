@@ -161,10 +161,8 @@
       renderCart();
     }
 
-    // Calculate subtotal, discount, total and update the UI
+    // Calculate total and update the UI
     function calculateSummary(cart) {
-      let subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-      let discount = subtotal * 0.10; // 10% discount example
       let total = subtotal - discount;
 
       document.getElementById('subtotal').textContent = `P${subtotal.toFixed(2)}`;
