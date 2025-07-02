@@ -5,82 +5,77 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Fabrica Vireo</title>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
-<body class="bg-white text-gray-800 font-sans">
-  <!-- Navbar -->
-  <header class="shadow-md py-4 px-6 flex justify-between items-center">
-    <h1 class="text-2xl font-bold text-green-600">Fabrica Vireo</h1>
-    <nav class="space-x-4 relative">
-      <a href="#home" class="hover:text-green-600">Home</a>
+<body class="bg-gray-50 text-gray-800">
+
+  <!-- HEADER SECTION -->
+  <header class="bg-white py-6 shadow-md text-center">
+    <h1 class="text-4xl font-extrabold text-green-600">Fabrica Vireo</h1>
+    <nav class="mt-4 space-x-6 text-lg font-medium text-gray-700">
+      <a href="index.html" class="hover:text-green-600">Home</a>
       <a href="#shop" class="hover:text-green-600">Shop</a>
       <a href="#about" class="hover:text-green-600">About</a>
       <a href="#contact" class="hover:text-green-600">Contact</a>
-      <a href="cart.html" class="hover:text-green-600 font-semibold relative">
+      <a href="cart.html" class="relative hover:text-green-600">
         🛒 Cart
         <span id="cart-count" class="absolute -top-2 -right-3 bg-green-600 text-white rounded-full text-xs w-5 h-5 flex items-center justify-center" style="display:none;">0</span>
       </a>
     </nav>
   </header>
 
-  <!-- Hero Section -->
-  <section id="home" class="bg-green-50 py-20 text-center">
-    <h2 class="text-4xl font-bold mb-4">Style That Thrives</h2>
-    <p class="text-lg text-gray-600 mb-6">Clothes and accessories designed to flourish in every season.</p>
-    <a href="#shop" class="bg-green-600 text-white px-6 py-2 rounded-full hover:bg-green-700">Shop Now</a>
+  <!-- SEARCH BAR -->
+  <section class="px-4 md:px-10 my-8 max-w-4xl mx-auto">
+    <input
+      type="text"
+      id="search-input"
+      placeholder="Search for products..."
+      class="w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-green-400 focus:outline-none"
+      oninput="filterProducts()"
+    />
   </section>
 
-  <!-- Shop Preview -->
-  <section id="shop" class="py-16 px-6">
-    <h3 class="text-3xl font-semibold mb-8 text-center">Featured Products</h3>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-      <div class="border p-4 rounded-lg shadow-sm">
-        <img src="https://via.placeholder.com/300" alt="Green Tee" class="mb-4" />
-        <h4 class="text-xl font-medium">Green Tee</h4>
-        <p class="text-green-600 font-semibold">P120</p>
-        <button onclick='addToCart({name:"Green Tee", price:120})' class="mt-2 bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">Add to Cart</button>
-      </div>
-      <div class="border p-4 rounded-lg shadow-sm">
-        <img src="https://via.placeholder.com/300" alt="Canvas Tote" class="mb-4" />
-        <h4 class="text-xl font-medium">Canvas Tote</h4>
-        <p class="text-green-600 font-semibold">P95</p>
-        <button onclick='addToCart({name:"Canvas Tote", price:95})' class="mt-2 bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">Add to Cart</button>
-      </div>
-      <div class="border p-4 rounded-lg shadow-sm">
-        <img src="https://via.placeholder.com/300" alt="Floral Bandana" class="mb-4" />
-        <h4 class="text-xl font-medium">Floral Bandana</h4>
-        <p class="text-green-600 font-semibold">P65</p>
-        <button onclick='addToCart({name:"Floral Bandana", price:65})' class="mt-2 bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">Add to Cart</button>
-      </div>
+  <!-- SHOP SECTION -->
+  <section id="shop" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 px-4 md:px-10 pb-16">
+    <!-- Example Product -->
+    <div class="product-card border p-4 rounded-lg shadow-sm" data-name="green tee">
+      <img src="https://via.placeholder.com/200x200" alt="Green Tee" class="mb-4 rounded" />
+      <h4 class="text-xl font-medium">Green Tee</h4>
+      <p class="text-green-600 font-semibold">P120</p>
+      <button
+        onclick='addToCart({name:"Green Tee", price:120, image:"https://via.placeholder.com/200x200"})'
+        class="mt-2 bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
+      >
+        Add to Cart
+      </button>
     </div>
+    <!-- More product cards can be added in the same format -->
   </section>
 
-  <!-- About -->
-  <section id="about" class="bg-gray-100 py-16 px-6 text-center">
-    <h3 class="text-3xl font-semibold mb-4">About Fabrica Vireo</h3>
-    <p class="max-w-xl mx-auto text-gray-600">Fabrica Vireo is more than a store — it's a celebration of growth, style, and nature. We bring you affordable, beautiful pieces made to thrive with you.</p>
-  </section>
-
-  <!-- Contact -->
-  <section id="contact" class="py-16 px-6 text-center">
-    <h3 class="text-3xl font-semibold mb-4">Get in Touch</h3>
-    <p class="mb-4">Email: fabricavireo@gmail.com</p>
-    <p>WhatsApp: +267 71234567</p>
-  </section>
-
-  <!-- Footer -->
-  <footer class="bg-green-600 text-white text-center py-4">
-    &copy; 2025 Fabrica Vireo. All rights reserved.
+  <!-- FOOTER -->
+  <footer class="bg-white text-center py-4 border-t mt-10">
+    <p class="text-gray-500 text-sm">&copy; 2025 Fabrica Vireo. All rights reserved.</p>
   </footer>
 
+  <!-- SCRIPT -->
   <script>
+    function filterProducts() {
+      const input = document.getElementById('search-input').value.toLowerCase();
+      const products = document.querySelectorAll('.product-card');
+
+      products.forEach(product => {
+        const name = product.dataset.name.toLowerCase();
+        product.style.display = name.includes(input) ? 'block' : 'none';
+      });
+    }
+
     function updateCartCount() {
       const cart = JSON.parse(localStorage.getItem('cart')) || [];
-      const totalQuantity = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
-      const cartCountElem = document.getElementById('cart-count');
-      if (cartCountElem) {
-        cartCountElem.textContent = totalQuantity;
-        cartCountElem.style.display = totalQuantity > 0 ? 'flex' : 'none';
+      const total = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
+      const badge = document.getElementById('cart-count');
+      if (badge) {
+        badge.textContent = total;
+        badge.style.display = total > 0 ? 'flex' : 'none';
       }
     }
 
@@ -100,5 +95,6 @@
 
     window.onload = updateCartCount;
   </script>
+
 </body>
 </html>
