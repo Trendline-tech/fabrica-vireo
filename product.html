@@ -2,126 +2,128 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Fabrica Vireo Cart - Ultimate Experience</title>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+  <title>Fabrica Vireo - Checkout</title>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="p-6 bg-green-50 text-green-900">
+<body class="bg-white text-green-900 font-sans">
 
-  <header class="shadow-md py-4 px-6 flex justify-between items-center mb-10 bg-white rounded">
-    <h1 class="text-3xl font-bold text-green-600">Fabrica Vireo</h1>
-    <nav class="space-x-6 relative text-lg font-medium">
-      <a href="index.html" class="hover:text-green-600 transition">Home</a>
-      <a href="checkout.html" class="hover:text-green-600 transition">Checkout</a>
-      <a href="#shop" class="hover:text-green-600 transition">Shop</a>
-      <a href="#about" class="hover:text-green-600 transition">About</a>
-      <a href="#contact" class="hover:text-green-600 transition">Contact</a>
-    </nav>
+  <header class="border-b border-green-200 p-4">
+    <div class="max-w-6xl mx-auto flex flex-col items-center">
+      <h1 class="text-3xl font-bold text-green-700">Fabrica Vireo</h1>
+      <nav class="mt-2 space-x-6 text-green-700 text-lg font-medium">
+        <a href="index.html" class="hover:text-green-600">Home</a>
+        <a href="shop.html" class="hover:text-green-600">Shop</a>
+        <a href="#about" class="hover:text-green-600">About</a>
+        <a href="#contact" class="hover:text-green-600">Contact</a>
+      </nav>
+    </div>
   </header>
 
-  <main class="max-w-5xl mx-auto bg-white rounded shadow-lg p-8">
-    <h2 class="text-4xl font-extrabold text-green-700 mb-8">Your Shopping Cart</h2>
-    <div id="cart-container" class="space-y-8"></div>
-    <section id="cart-summary" class="mt-12 flex flex-col md:flex-row justify-between items-center border-t pt-6">
-      <div class="text-2xl font-extrabold text-gray-700 mb-6 md:mb-0">
-        Total: <span id="total">P0.00</span>
-      </div>
-      <button id="checkout-btn" class="bg-green-600 text-white px-8 py-3 rounded-md text-lg font-semibold hover:bg-green-700 transition">
-        Proceed to Checkout
-      </button>
+  <main class="max-w-6xl mx-auto p-6">
+
+    <section id="cart" class="mb-10">
+      <h2 class="text-2xl font-semibold mb-4">Your Cart</h2>
+      <p class="text-green-700 italic">Products will appear here once added.</p>
     </section>
+
+    <section class="max-w-xl bg-green-50 rounded shadow-md p-6">
+      <h2 class="text-xl font-semibold mb-4 text-green-800">Secure Checkout & Payment</h2>
+
+      <p class="mb-4 text-green-800 font-medium">Use our secure PayPal gateway to complete your order safely and instantly:</p>
+
+      <div id="paypal-button-container" class="mb-6"></div>
+
+      <p class="text-green-700 text-sm italic">Once payment is complete, you'll be redirected to a secure confirmation page. Your order will be processed immediately.</p>
+
+      <form id="payment-form" class="mt-6 hidden" enctype="multipart/form-data" onsubmit="return handleSubmit(event)">
+        <label for="payment-proof" class="block mb-2 font-medium text-green-800">Upload Payment Proof (optional):</label>
+        <input type="file" id="payment-proof" name="payment-proof" accept="image/*" class="block w-full border rounded p-2 mb-4" />
+
+        <button type="submit" class="bg-green-600 text-white px-6 py-2 rounded hover:bg-green-700">Submit Order</button>
+      </form>
+
+      <p id="form-message" class="mt-4 text-green-700 font-semibold"></p>
+    </section>
+
   </main>
 
+  <footer class="bg-green-50 border-t border-green-200 mt-16">
+    <div class="max-w-6xl mx-auto py-10 px-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 text-green-800 text-sm">
+      <div>
+        <h4 class="text-lg font-semibold mb-4 text-green-700">Fabrica Vireo</h4>
+        <p>Trendy, affordable clothing and accessories built to inspire every day.</p>
+      </div>
+      <div>
+        <h4 class="text-lg font-semibold mb-4">About</h4>
+        <ul class="space-y-2">
+          <li><a href="#about" class="hover:text-green-600">About Us</a></li>
+          <li><a href="#shop" class="hover:text-green-600">Shop</a></li>
+          <li><a href="#contact" class="hover:text-green-600">Contact</a></li>
+          <li><a href="#" class="hover:text-green-600">FAQ</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="text-lg font-semibold mb-4">Customer Service</h4>
+        <ul class="space-y-2">
+          <li><a href="#" class="hover:text-green-600">Shipping & Returns</a></li>
+          <li><a href="#" class="hover:text-green-600">Size Guide</a></li>
+          <li><a href="#" class="hover:text-green-600">Track Order</a></li>
+          <li><a href="#" class="hover:text-green-600">Help</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="text-lg font-semibold mb-4">Connect With Us</h4>
+        <ul class="space-y-3 text-sm">
+          <li><a href="mailto:destinytrends178@gmail.com" class="hover:text-green-600">Email Us</a></li>
+          <li><a href="tel:+26772614696" class="hover:text-green-600">+267 7261 4696</a></li>
+          <li><a href="https://wa.me/26772614696" target="_blank" class="hover:text-green-600">WhatsApp Chat</a></li>
+          <li><a href="https://www.instagram.com/fabrica.vireo" target="_blank" class="hover:text-green-600">Instagram</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="text-center text-green-600 text-xs py-4 border-t border-green-200">&copy; 2025 Fabrica Vireo. All rights reserved.</div>
+  </footer>
+
+  <script src="https://www.paypal.com/sdk/js?client-id=VXNFSCB9TSCZL&currency=USD"></script>
   <script>
-    function loadCart() {
-      return JSON.parse(localStorage.getItem('cart')) || [];
+    let totalAmount = 0;
+    function calculateTotal() {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      totalAmount = cart.reduce((sum, item) => sum + (item.price * (item.quantity || 1)), 0);
     }
+    calculateTotal();
 
-    function saveCart(cart) {
-      localStorage.setItem('cart', JSON.stringify(cart));
-    }
-
-    function updateCartCount() {
-      const cart = loadCart();
-      const totalQuantity = cart.reduce((acc, item) => acc + (item.quantity || 1), 0);
-      const cartCount = document.getElementById('cart-count');
-      if (cartCount) {
-        cartCount.style.display = totalQuantity > 0 ? 'flex' : 'none';
-        cartCount.textContent = totalQuantity;
+    paypal.Buttons({
+      createOrder: function(data, actions) {
+        return actions.order.create({
+          purchase_units: [{
+            amount: {
+              value: totalAmount.toFixed(2)
+            }
+          }]
+        });
+      },
+      onApprove: function(data, actions) {
+        return actions.order.capture().then(function(details) {
+          document.getElementById('form-message').textContent = `Thank you, ${details.payer.name.given_name}! Your payment of $${totalAmount.toFixed(2)} was successful.`;
+          localStorage.removeItem("cart");
+          window.location.href = 'thank-you.html';
+        });
       }
+    }).render('#paypal-button-container');
+
+    function handleSubmit(event) {
+      event.preventDefault();
+      const fileInput = document.getElementById('payment-proof');
+      document.getElementById('form-message').textContent =
+        'Thank you! Your order has been submitted. We will contact you soon to confirm your payment.';
+      event.target.reset();
+      localStorage.removeItem("cart");
+      return false;
     }
-
-    function renderCart() {
-      const cart = loadCart();
-      const container = document.getElementById('cart-container');
-      container.innerHTML = '';
-
-      if (cart.length === 0) {
-        container.innerHTML = `<p class="text-center text-lg text-gray-600 py-10">Your cart is empty. <a href="index.html" class="text-green-600 underline">Start Shopping</a></p>`;
-        updateTotal(0);
-        return;
-      }
-
-      cart.forEach((item, i) => {
-        const itemTotal = (item.price * item.quantity).toFixed(2);
-        const div = document.createElement('div');
-        div.className = 'flex flex-col md:flex-row items-center md:items-start gap-6 border rounded-lg p-6';
-        div.innerHTML = `
-          <img src="${item.image}" alt="${item.name}" class="w-28 h-28 object-cover rounded-lg shadow-md" />
-          <div class="flex-1">
-            <h3 class="text-2xl font-semibold text-gray-800">${item.name}</h3>
-            <p class="text-green-600 font-bold text-xl mt-1">P${item.price.toFixed(2)}</p>
-            <div class="mt-4 flex items-center gap-4">
-              <button class="qty-btn bg-green-100 text-green-800 px-3 py-1 rounded" onclick="changeQuantity(${i}, -1)">−</button>
-              <input type="text" class="qty-box border w-12 text-center" value="${item.quantity}" readonly />
-              <button class="qty-btn bg-green-100 text-green-800 px-3 py-1 rounded" onclick="changeQuantity(${i}, 1)">+</button>
-              <button class="ml-6 text-red-600 hover:text-red-800" onclick="removeItem(${i})">Remove</button>
-            </div>
-          </div>
-          <div class="text-3xl font-extrabold text-green-700 mt-4 md:mt-0">P${itemTotal}</div>
-        `;
-        container.appendChild(div);
-      });
-
-      const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
-      updateTotal(total);
-    }
-
-    function updateTotal(total) {
-      document.getElementById('total').textContent = `P${total.toFixed(2)}`;
-    }
-
-    function changeQuantity(index, delta) {
-      const cart = loadCart();
-      if (!cart[index]) return;
-      let newQty = (cart[index].quantity || 1) + delta;
-      if (newQty < 1) {
-        cart.splice(index, 1);
-      } else {
-        cart[index].quantity = newQty;
-      }
-      saveCart(cart);
-      renderCart();
-    }
-
-    function removeItem(index) {
-      const cart = loadCart();
-      cart.splice(index, 1);
-      saveCart(cart);
-      renderCart();
-    }
-
-    document.getElementById("checkout-btn").addEventListener("click", function () {
-      const cart = loadCart();
-      if (cart.length === 0) {
-        alert("Your cart is empty. Add items before checking out.");
-      } else {
-        window.location.href = "checkout.html";
-      }
-    });
-
-    window.onload = renderCart;
   </script>
+
 </body>
 </html>
