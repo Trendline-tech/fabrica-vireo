@@ -2,9 +2,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Fabrica Vireo</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fabrica Vireo - Home</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
 <body class="bg-gray-50 text-gray-800">
@@ -13,10 +13,11 @@
   <header class="bg-white py-6 shadow-md text-center">
     <h1 class="text-4xl font-extrabold text-green-600">Fabrica Vireo</h1>
     <nav class="mt-4 space-x-6 text-lg font-medium text-gray-700">
-      <a href="index.html" class="hover:text-green-600">Home</a>
       <a href="#shop" class="hover:text-green-600">Shop</a>
-      <a href="#about" class="hover:text-green-600">About</a>
-      <a href="#contact" class="hover:text-green-600">Contact</a>
+      <a href="#electronics" class="hover:text-green-600">Electronics</a>
+      <a href="#clothing" class="hover:text-green-600">Clothing</a>
+      <a href="#footwear" class="hover:text-green-600">Footwear</a>
+      <a href="#accessories" class="hover:text-green-600">Accessories</a>
       <a href="cart.html" class="relative hover:text-green-600">
         🛒 Cart
         <span id="cart-count" class="absolute -top-2 -right-3 bg-green-600 text-white rounded-full text-xs w-5 h-5 flex items-center justify-center" style="display:none;">0</span>
@@ -24,72 +25,71 @@
     </nav>
   </header>
 
-  <!-- SEARCH BAR -->
-  <section class="px-4 md:px-10 my-8 max-w-4xl mx-auto">
-    <input
-      type="text"
-      id="search-input"
-      placeholder="Search for products..."
-      class="w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-green-400 focus:outline-none"
-      oninput="filterProducts()"
-    />
-  </section>
-
-  <!-- SHOP SECTION -->
-  <section id="shop" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 px-4 md:px-10 pb-16">
-    <!-- Product items will be added via JavaScript -->
-  </section>
-
-  <!-- FOOTER -->
-  <footer class="bg-green-50 border-t border-green-200 mt-16">
-    <div class="max-w-6xl mx-auto py-10 px-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 text-green-800 text-sm">
-      <div>
-        <h4 class="text-lg font-semibold mb-4 text-green-700">Fabrica Vireo</h4>
-        <p>Trendy, affordable clothing and accessories built to inspire every day.</p>
-      </div>
-      <div>
-        <h4 class="text-lg font-semibold mb-4">Links</h4>
-        <ul class="space-y-2">
-          <li><a href="#about" class="hover:text-green-600">About Us</a></li>
-          <li><a href="#shop" class="hover:text-green-600">Shop</a></li>
-          <li><a href="#contact" class="hover:text-green-600">Contact</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4 class="text-lg font-semibold mb-4">Contact</h4>
-        <ul class="space-y-2">
-          <li><a href="mailto:destinytrends178@gmail.com" class="hover:text-green-600">Email</a></li>
-          <li><a href="tel:+26772614696" class="hover:text-green-600">+267 7261 4696</a></li>
-        </ul>
+  <!-- ELECTRONICS SECTION -->
+  <section id="electronics" class="px-4 md:px-10 pt-16">
+    <h2 class="text-2xl font-bold text-green-700 mb-6">Electronics</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+      <div class="product-card border p-4 rounded-lg shadow-sm">
+        <img src="/mnt/data/1751568326054.jpg" alt="RGB Wireless Mouse" class="mb-4 rounded w-full h-48 object-cover">
+        <h4 class="text-xl font-medium">RGB Wireless Mouse</h4>
+        <p class="text-green-600 font-semibold">P185</p>
+        <button onclick='addToCart({name:"RGB Wireless Mouse", price:185, image:"/mnt/data/1751568326054.jpg"})' class="mt-2 bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">Add to Cart</button>
       </div>
     </div>
-    <div class="text-center text-green-600 text-xs py-4 border-t border-green-200">&copy; 2025 Fabrica Vireo. All rights reserved.</div>
-  </footer>
+  </section>
+
+  <!-- CLOTHING SECTION -->
+  <section id="clothing" class="px-4 md:px-10 pt-16">
+    <h2 class="text-2xl font-bold text-green-700 mb-6">Clothing</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+      <div class="product-card border p-4 rounded-lg shadow-sm">
+        <img src="https://via.placeholder.com/200x200?text=Green+Tee" alt="Green Tee" class="mb-4 rounded w-full h-48 object-cover">
+        <h4 class="text-xl font-medium">Green Tee</h4>
+        <p class="text-green-600 font-semibold">P120</p>
+        <button onclick='addToCart({name:"Green Tee", price:120, image:"https://via.placeholder.com/200x200?text=Green+Tee"})' class="mt-2 bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">Add to Cart</button>
+      </div>
+      <div class="product-card border p-4 rounded-lg shadow-sm">
+        <img src="https://via.placeholder.com/200x200?text=Crop+Top" alt="Crop Top" class="mb-4 rounded w-full h-48 object-cover">
+        <h4 class="text-xl font-medium">Crop Top</h4>
+        <p class="text-green-600 font-semibold">P130</p>
+        <button onclick='addToCart({name:"Crop Top", price:130, image:"https://via.placeholder.com/200x200?text=Crop+Top"})' class="mt-2 bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">Add to Cart</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTWEAR SECTION -->
+  <section id="footwear" class="px-4 md:px-10 pt-16">
+    <h2 class="text-2xl font-bold text-green-700 mb-6">Footwear</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+      <div class="product-card border p-4 rounded-lg shadow-sm">
+        <img src="https://via.placeholder.com/200x200?text=Nike+Airforce" alt="Nike Air Force" class="mb-4 rounded w-full h-48 object-cover">
+        <h4 class="text-xl font-medium">Nike Air Force</h4>
+        <p class="text-green-600 font-semibold">P620</p>
+        <button onclick='addToCart({name:"Nike Air Force", price:620, image:"https://via.placeholder.com/200x200?text=Nike+Airforce"})' class="mt-2 bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">Add to Cart</button>
+      </div>
+      <div class="product-card border p-4 rounded-lg shadow-sm">
+        <img src="https://via.placeholder.com/200x200?text=Adidas+Shoes" alt="Adidas Running Shoes" class="mb-4 rounded w-full h-48 object-cover">
+        <h4 class="text-xl font-medium">Adidas Running Shoes</h4>
+        <p class="text-green-600 font-semibold">P550</p>
+        <button onclick='addToCart({name:"Adidas Running Shoes", price:550, image:"https://via.placeholder.com/200x200?text=Adidas+Shoes"})' class="mt-2 bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">Add to Cart</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ACCESSORIES SECTION -->
+  <section id="accessories" class="px-4 md:px-10 pt-16 pb-20">
+    <h2 class="text-2xl font-bold text-green-700 mb-6">Accessories</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+      <div class="product-card border p-4 rounded-lg shadow-sm">
+        <img src="https://via.placeholder.com/200x200?text=Cap" alt="Baseball Cap" class="mb-4 rounded w-full h-48 object-cover">
+        <h4 class="text-xl font-medium">Baseball Cap</h4>
+        <p class="text-green-600 font-semibold">P90</p>
+        <button onclick='addToCart({name:"Baseball Cap", price:90, image:"https://via.placeholder.com/200x200?text=Cap"})' class="mt-2 bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">Add to Cart</button>
+      </div>
+    </div>
+  </section>
 
   <script>
-    const products = [
-      { name: "Adidas Running Shoes", price: 550, image: "https://via.placeholder.com/200?text=Adidas+Shoes" },
-      { name: "Nike Air Force 1", price: 620, image: "https://via.placeholder.com/200?text=Nike+Airforce" },
-      { name: "Black Hoodie", price: 300, image: "https://via.placeholder.com/200?text=Black+Hoodie" },
-      { name: "White T-shirt", price: 150, image: "https://via.placeholder.com/200?text=White+Tee" },
-      { name: "Denim Jacket", price: 480, image: "https://via.placeholder.com/200?text=Denim+Jacket" },
-      { name: "Leather Jacket", price: 700, image: "https://via.placeholder.com/200?text=Leather+Jacket" },
-      { name: "Red Dress", price: 420, image: "https://via.placeholder.com/200?text=Red+Dress" },
-      { name: "Blue Jeans", price: 270, image: "https://via.placeholder.com/200?text=Blue+Jeans" },
-      { name: "Baseball Cap", price: 90, image: "https://via.placeholder.com/200?text=Cap" },
-      { name: "Sneakers", price: 360, image: "https://via.placeholder.com/200?text=Sneakers" },
-      { name: "Tracksuit", price: 450, image: "https://via.placeholder.com/200?text=Tracksuit" },
-      { name: "Crop Top", price: 130, image: "https://via.placeholder.com/200?text=Crop+Top" },
-      { name: "Summer Shorts", price: 180, image: "https://via.placeholder.com/200?text=Shorts" },
-      { name: "Joggers", price: 300, image: "https://via.placeholder.com/200?text=Joggers" },
-      { name: "Sweatshirt", price: 290, image: "https://via.placeholder.com/200?text=Sweatshirt" },
-      { name: "Canvas Shoes", price: 310, image: "https://via.placeholder.com/200?text=Canvas+Shoes" },
-      { name: "Polo Shirt", price: 250, image: "https://via.placeholder.com/200?text=Polo+Shirt" },
-      { name: "Trench Coat", price: 690, image: "https://via.placeholder.com/200?text=Trench+Coat" },
-      { name: "Sport Bra", price: 190, image: "https://via.placeholder.com/200?text=Sport+Bra" },
-      { name: "Bomber Jacket", price: 540, image: "https://via.placeholder.com/200?text=Bomber+Jacket" }
-    ];
-
     function addToCart(item) {
       let cart = JSON.parse(localStorage.getItem("cart")) || [];
       const index = cart.findIndex(p => p.name === item.name);
@@ -111,33 +111,7 @@
       cartCount.textContent = totalQuantity;
     }
 
-    function displayProducts() {
-      const shop = document.getElementById("shop");
-      shop.innerHTML = "";
-      products.forEach(product => {
-        shop.innerHTML += `
-          <div class="product-card border p-4 rounded-lg shadow-sm" data-name="${product.name.toLowerCase()}">
-            <img src="${product.image}" alt="${product.name}" class="mb-4 rounded w-full h-48 object-cover" />
-            <h4 class="text-xl font-medium">${product.name}</h4>
-            <p class="text-green-600 font-semibold">P${product.price}</p>
-            <button onclick='addToCart(${JSON.stringify(product)})' class="mt-2 bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">Add to Cart</button>
-          </div>
-        `;
-      });
-    }
-
-    function filterProducts() {
-      const input = document.getElementById("search-input").value.toLowerCase();
-      document.querySelectorAll(".product-card").forEach(card => {
-        const name = card.getAttribute("data-name");
-        card.style.display = name.includes(input) ? "block" : "none";
-      });
-    }
-
-    window.onload = function () {
-      displayProducts();
-      updateCartCount();
-    }
+    window.onload = updateCartCount;
   </script>
 
 </body>
