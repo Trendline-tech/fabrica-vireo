@@ -3,118 +3,125 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Fabrica Vireo - Home</title>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Fabrica Vireo Cart - Ultimate Experience</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
 </head>
-<body class="bg-gray-50 text-gray-800">
+<body class="p-6 bg-green-50 text-green-900">
 
-  <!-- HEADER SECTION -->
-  <header class="bg-white py-6 shadow-md text-center">
-    <h1 class="text-4xl font-extrabold text-green-600">Fabrica Vireo</h1>
-    <nav class="mt-4 space-x-6 text-lg font-medium text-gray-700">
-      <a href="#shop" class="hover:text-green-600">Shop</a>
-      <a href="#electronics" class="hover:text-green-600">Electronics</a>
-      <a href="#clothing" class="hover:text-green-600">Clothing</a>
-      <a href="#footwear" class="hover:text-green-600">Footwear</a>
-      <a href="#accessories" class="hover:text-green-600">Accessories</a>
-      <a href="cart.html" class="relative hover:text-green-600">
-        🛒 Cart
-        <span id="cart-count" class="absolute -top-2 -right-3 bg-green-600 text-white rounded-full text-xs w-5 h-5 flex items-center justify-center" style="display:none;">0</span>
-      </a>
+  <header class="shadow-md py-4 px-6 flex justify-between items-center mb-10 bg-white rounded">
+    <h1 class="text-3xl font-bold text-green-600">Fabrica Vireo</h1>
+    <nav class="space-x-6 relative text-lg font-medium">
+      <a href="index.html" class="hover:text-green-600 transition">Home</a>
+      <a href="checkout.html" class="hover:text-green-600 transition">Checkout</a>
+      <a href="#shop" class="hover:text-green-600 transition">Shop</a>
+      <a href="#about" class="hover:text-green-600 transition">About</a>
+      <a href="#contact" class="hover:text-green-600 transition">Contact</a>
     </nav>
   </header>
 
-  <!-- ELECTRONICS SECTION -->
-  <section id="electronics" class="px-4 md:px-10 pt-16">
-    <h2 class="text-2xl font-bold text-green-700 mb-6">Electronics</h2>
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-      <div class="product-card border p-4 rounded-lg shadow-sm">
-        <img src="/mnt/data/1751568326054.jpg" alt="RGB Wireless Mouse" class="mb-4 rounded w-full h-48 object-cover">
-        <h4 class="text-xl font-medium">
-          <a href="product.html" class="text-green-700 hover:underline">RGB Wireless Mouse</a>
-        </h4>
-        <p class="text-green-600 font-semibold">P185</p>
-        <a href="product.html" class="mt-2 inline-block text-blue-600 hover:underline">View Details</a>
+  <main class="max-w-5xl mx-auto bg-white rounded shadow-lg p-8">
+    <h2 class="text-4xl font-extrabold text-green-700 mb-8">Your Shopping Cart</h2>
+    <div id="cart-container" class="space-y-8"></div>
+    <section id="cart-summary" class="mt-12 flex flex-col md:flex-row justify-between items-center border-t pt-6">
+      <div class="text-2xl font-extrabold text-gray-700 mb-6 md:mb-0">
+        Total: <span id="total">P0.00</span>
       </div>
-    </div>
-  </section>
-
-  <!-- CLOTHING SECTION -->
-  <section id="clothing" class="px-4 md:px-10 pt-16">
-    <h2 class="text-2xl font-bold text-green-700 mb-6">Clothing</h2>
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-      <div class="product-card border p-4 rounded-lg shadow-sm">
-        <img src="https://via.placeholder.com/200x200?text=Green+Tee" alt="Green Tee" class="mb-4 rounded w-full h-48 object-cover">
-        <h4 class="text-xl font-medium">Green Tee</h4>
-        <p class="text-green-600 font-semibold">P120</p>
-        <button onclick='addToCart({name:"Green Tee", price:120, image:"https://via.placeholder.com/200x200?text=Green+Tee"})' class="mt-2 bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">Add to Cart</button>
-      </div>
-      <div class="product-card border p-4 rounded-lg shadow-sm">
-        <img src="https://via.placeholder.com/200x200?text=Crop+Top" alt="Crop Top" class="mb-4 rounded w-full h-48 object-cover">
-        <h4 class="text-xl font-medium">Crop Top</h4>
-        <p class="text-green-600 font-semibold">P130</p>
-        <button onclick='addToCart({name:"Crop Top", price:130, image:"https://via.placeholder.com/200x200?text=Crop+Top"})' class="mt-2 bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">Add to Cart</button>
-      </div>
-    </div>
-  </section>
-
-  <!-- FOOTWEAR SECTION -->
-  <section id="footwear" class="px-4 md:px-10 pt-16">
-    <h2 class="text-2xl font-bold text-green-700 mb-6">Footwear</h2>
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-      <div class="product-card border p-4 rounded-lg shadow-sm">
-        <img src="https://via.placeholder.com/200x200?text=Nike+Airforce" alt="Nike Air Force" class="mb-4 rounded w-full h-48 object-cover">
-        <h4 class="text-xl font-medium">Nike Air Force</h4>
-        <p class="text-green-600 font-semibold">P620</p>
-        <button onclick='addToCart({name:"Nike Air Force", price:620, image:"https://via.placeholder.com/200x200?text=Nike+Airforce"})' class="mt-2 bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">Add to Cart</button>
-      </div>
-      <div class="product-card border p-4 rounded-lg shadow-sm">
-        <img src="https://via.placeholder.com/200x200?text=Adidas+Shoes" alt="Adidas Running Shoes" class="mb-4 rounded w-full h-48 object-cover">
-        <h4 class="text-xl font-medium">Adidas Running Shoes</h4>
-        <p class="text-green-600 font-semibold">P550</p>
-        <button onclick='addToCart({name:"Adidas Running Shoes", price:550, image:"https://via.placeholder.com/200x200?text=Adidas+Shoes"})' class="mt-2 bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">Add to Cart</button>
-      </div>
-    </div>
-  </section>
-
-  <!-- ACCESSORIES SECTION -->
-  <section id="accessories" class="px-4 md:px-10 pt-16 pb-20">
-    <h2 class="text-2xl font-bold text-green-700 mb-6">Accessories</h2>
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-      <div class="product-card border p-4 rounded-lg shadow-sm">
-        <img src="https://via.placeholder.com/200x200?text=Cap" alt="Baseball Cap" class="mb-4 rounded w-full h-48 object-cover">
-        <h4 class="text-xl font-medium">Baseball Cap</h4>
-        <p class="text-green-600 font-semibold">P90</p>
-        <button onclick='addToCart({name:"Baseball Cap", price:90, image:"https://via.placeholder.com/200x200?text=Cap"})' class="mt-2 bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">Add to Cart</button>
-      </div>
-    </div>
-  </section>
+      <button id="checkout-btn" class="bg-green-600 text-white px-8 py-3 rounded-md text-lg font-semibold hover:bg-green-700 transition">
+        Proceed to Checkout
+      </button>
+    </section>
+  </main>
 
   <script>
-    function addToCart(item) {
-      let cart = JSON.parse(localStorage.getItem("cart")) || [];
-      const index = cart.findIndex(p => p.name === item.name);
-      if (index >= 0) {
-        cart[index].quantity += 1;
-      } else {
-        cart.push({ ...item, quantity: 1 });
-      }
-      localStorage.setItem("cart", JSON.stringify(cart));
-      updateCartCount();
-      alert(item.name + " added to cart!");
+    function loadCart() {
+      return JSON.parse(localStorage.getItem('cart')) || [];
+    }
+
+    function saveCart(cart) {
+      localStorage.setItem('cart', JSON.stringify(cart));
     }
 
     function updateCartCount() {
-      const cart = JSON.parse(localStorage.getItem("cart")) || [];
+      const cart = loadCart();
       const totalQuantity = cart.reduce((acc, item) => acc + (item.quantity || 1), 0);
-      const cartCount = document.getElementById("cart-count");
-      cartCount.style.display = totalQuantity > 0 ? "flex" : "none";
-      cartCount.textContent = totalQuantity;
+      const cartCount = document.getElementById('cart-count');
+      if (cartCount) {
+        cartCount.style.display = totalQuantity > 0 ? 'flex' : 'none';
+        cartCount.textContent = totalQuantity;
+      }
     }
 
-    window.onload = updateCartCount;
-  </script>
+    function renderCart() {
+      const cart = loadCart();
+      const container = document.getElementById('cart-container');
+      container.innerHTML = '';
 
+      if (cart.length === 0) {
+        container.innerHTML = `<p class="text-center text-lg text-gray-600 py-10">Your cart is empty. <a href="index.html" class="text-green-600 underline">Start Shopping</a></p>`;
+        updateTotal(0);
+        return;
+      }
+
+      cart.forEach((item, i) => {
+        const itemTotal = (item.price * item.quantity).toFixed(2);
+        const div = document.createElement('div');
+        div.className = 'flex flex-col md:flex-row items-center md:items-start gap-6 border rounded-lg p-6';
+        div.innerHTML = `
+          <img src="${item.image}" alt="${item.name}" class="w-28 h-28 object-cover rounded-lg shadow-md" />
+          <div class="flex-1">
+            <h3 class="text-2xl font-semibold text-gray-800">${item.name}</h3>
+            <p class="text-green-600 font-bold text-xl mt-1">P${item.price.toFixed(2)}</p>
+            <div class="mt-4 flex items-center gap-4">
+              <button class="qty-btn bg-green-100 text-green-800 px-3 py-1 rounded" onclick="changeQuantity(${i}, -1)">−</button>
+              <input type="text" class="qty-box border w-12 text-center" value="${item.quantity}" readonly />
+              <button class="qty-btn bg-green-100 text-green-800 px-3 py-1 rounded" onclick="changeQuantity(${i}, 1)">+</button>
+              <button class="ml-6 text-red-600 hover:text-red-800" onclick="removeItem(${i})">Remove</button>
+            </div>
+          </div>
+          <div class="text-3xl font-extrabold text-green-700 mt-4 md:mt-0">P${itemTotal}</div>
+        `;
+        container.appendChild(div);
+      });
+
+      const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+      updateTotal(total);
+    }
+
+    function updateTotal(total) {
+      document.getElementById('total').textContent = `P${total.toFixed(2)}`;
+    }
+
+    function changeQuantity(index, delta) {
+      const cart = loadCart();
+      if (!cart[index]) return;
+      let newQty = (cart[index].quantity || 1) + delta;
+      if (newQty < 1) {
+        cart.splice(index, 1);
+      } else {
+        cart[index].quantity = newQty;
+      }
+      saveCart(cart);
+      renderCart();
+    }
+
+    function removeItem(index) {
+      const cart = loadCart();
+      cart.splice(index, 1);
+      saveCart(cart);
+      renderCart();
+    }
+
+    document.getElementById("checkout-btn").addEventListener("click", function () {
+      const cart = loadCart();
+      if (cart.length === 0) {
+        alert("Your cart is empty. Add items before checking out.");
+      } else {
+        window.location.href = "checkout.html";
+      }
+    });
+
+    window.onload = renderCart;
+  </script>
 </body>
 </html>
