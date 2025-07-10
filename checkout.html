@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Checkout - Fabrica Vireo</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://www.paypal.com/sdk/js?client-id=YOUR_CLIENT_ID&currency=USD"></script>
+</head>
+<body class="bg-white text-green-900 font-sans">
+  <main class="max-w-4xl mx-auto p-6">
+    <h1 class="text-3xl font-bold mb-6">Your Cart</h1>
+    <div id="cart-items" class="space-y-4"></div>
+    <div class="flex justify-end mt-4 text-xl font-semibold">Total: <span id="cart-total" class="ml-2">$0.00</span></div>
+    <div id="paypal-button-container" class="mt-6"></div>
+  </main>
+
+  <script>
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const container = document.getElementById('cart-items');
+    const totalSpan = document.getElementById('cart-total');
+
+    function updateCart() {
+      container.innerHTML = "";
+      let total = 0;
+
+      cart.forEach(item => {
+        const itemTotal = item.price * item.qty;
+        total += itemTotal;
+
+        const div = document.createElement('div');
+        div.className = "flex justify-between items-center border p-4 rounded";
+        div.innerHTML = \`
+          <span>\${item.name} (x\${item.qty})</span>
+          <span class="font-medium">\${itemTotal.toFixed(2)} USD</span>
+        \`;
+        container.appendChild(div);
+      });
+
+      totalSpan.innerText = "$" + total.toFixed(2);
+      return total.toFixed(2);
+    }
+
+    const finalTotal = updateCart();
+
+    paypal.Buttons({
+      createOrder: function(data, actions) {
+        return actions.order.create({
+          purchase_units: [{
+            amount: {
+              value: finalTotal
+            }
+          }]
+        });
+      },
+      onApprove: function(data, actions) {
+        return actions.order.capture().then(function(details) {
+          localStorage.removeItem('cart');
+          alert('Payment completed by ' + details.payer.name.given_name + '!');
+          window.location.href = "success.html";
+        });
+      }
+    }).render('#paypal-button-container');
+  </script>
+</body>
+</html>
