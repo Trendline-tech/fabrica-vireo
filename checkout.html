@@ -1,78 +1,39 @@
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Fabrica Vireo - Checkout</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-
-  <!-- ✅ PayPal Script -->
-  <script src="https://www.paypal.com/sdk/js?client-id=YOUR_CLIENT_ID&currency=USD"></script>
-</head>
-<body class="bg-white text-green-900 font-sans">
-
-  <!-- Header -->
-  <header class="border-b border-green-200 p-4">
-    <div class="max-w-6xl mx-auto flex flex-col items-center">
-      <h1 class="text-3xl font-bold text-green-700">Fabrica Vireo</h1>
-      <nav class="mt-2 space-x-6 text-green-700 text-lg font-medium">
-        <a href="index.html" class="hover:text-green-600">Home</a>
-        <a href="shop.html" class="hover:text-green-600">Shop</a>
-        <a href="#about" class="hover:text-green-600">About</a>
-        <a href="#contact" class="hover:text-green-600">Contact</a>
-      </nav>
+<!-- Cart Items -->
+<div id="cart-items" class="space-y-4">
+  <!-- Example product -->
+  <div class="flex justify-between items-center border p-4 rounded" data-price="20.00">
+    <span>Eco Tote Bag</span>
+    <div class="flex items-center gap-2">
+      <input type="number" value="1" min="1" class="w-16 border rounded p-1 quantity" />
+      <span class="item-total font-medium">$20.00</span>
     </div>
-  </header>
+  </div>
+</div>
 
-  <!-- Main Checkout -->
-  <main class="max-w-6xl mx-auto p-6">
+<!-- Total -->
+<div class="flex justify-end mt-4">
+  <p class="text-xl font-semibold">Total: <span id="cart-total">$20.00</span></p>
+</div>
 
-    <!-- Cart Section -->
-    <section id="cart" class="mb-10">
-      <h2 class="text-2xl font-semibold mb-4">Your Cart</h2>
+<script>
+  function updateCartTotal() {
+    const items = document.querySelectorAll("#cart-items > div");
+    let total = 0;
+    items.forEach(item => {
+      const price = parseFloat(item.dataset.price);
+      const qty = parseInt(item.querySelector('.quantity').value);
+      const itemTotal = price * qty;
+      item.querySelector('.item-total').innerText = `$${itemTotal.toFixed(2)}`;
+      total += itemTotal;
+    });
+    document.getElementById("cart-total").innerText = `$${total.toFixed(2)}`;
+  }
 
-      <!-- Example Cart Item -->
-      <div class="border p-4 rounded mb-4">
-        <div class="flex justify-between">
-          <span>Eco Tote Bag</span>
-          <span>$20.00</span>
-        </div>
-      </div>
+  document.querySelectorAll('.quantity').forEach(input => {
+    input.addEventListener('input', updateCartTotal);
+  });
 
-      <!-- Total -->
-      <div class="flex justify-end">
-        <p class="text-xl font-semibold">Total: <span id="cart-total">$20.00</span></p>
-      </div>
-    </section>
-
-    <!-- PayPal Button -->
-    <div id="paypal-button-container" class="mt-6"></div>
-
-    <!-- PayPal Dynamic Script -->
-    <script>
-      paypal.Buttons({
-        createOrder: function(data, actions) {
-          const totalText = document.getElementById("cart-total").innerText;
-          const amount = parseFloat(totalText.replace('$', '')) || 0;
-
-          return actions.order.create({
-            purchase_units: [{
-              amount: {
-                value: amount.toFixed(2)
-              }
-            }]
-          });
-        },
-        onApprove: function(data, actions) {
-          return actions.order.capture().then(function(details) {
-            alert('Payment completed by ' + details.payer.name.given_name + '!');
-            window.location.href = "success.html";
-          });
-        }
-      }).render('#paypal-button-container');
-    </script>
-
-  </main>
-</body>
-</html>
+  // Initialize total on page load
+  updateCartTotal();
+</script>
