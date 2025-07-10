@@ -86,7 +86,29 @@
         Proceed to Checkout
       </button>
     </section>
-  </main>
+  <div id="paypal-button-container" class="mt-6"></div>
+
+<script>
+  paypal.Buttons({
+    createOrder: function(data, actions) {
+      return actions.order.create({
+        purchase_units: [{
+          amount: {
+            value: '20.00' // Change this to your product price
+          }
+        }]
+      });
+    },
+    onApprove: function(data, actions) {
+      return actions.order.capture().then(function(details) {
+        alert('Payment completed by ' + details.payer.name.given_name + '!');
+        // Optionally redirect to a success page
+        window.location.href = "success.html";
+      });
+    }
+  }).render('#paypal-button-container');
+</script>
+
 
   <script>
     function loadCart() {
