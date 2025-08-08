@@ -1,65 +1,159 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Checkout - Fabrica Vireo</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://www.paypal.com/sdk/js?client-id=YOUR_CLIENT_ID&currency=USD"></script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Fabrica Vireo — Checkout</title>
+  <style>
+    /* Minimal styling so the page isn't blank if CSS fails elsewhere */
+    body { font-family: system-ui, -apple-system, Roboto, "Segoe UI", Arial; margin: 2rem; color:#111 }
+    .container { max-width: 720px; margin: 0 auto; }
+    .summary { margin: 1rem 0; padding: 1rem; border: 1px solid #eee; border-radius:8px; background:#fafafa }
+    .muted { color: #666; font-size:0.95rem; }
+    #error { color: #900; margin-top: 1rem; display:none; }
+  </style>
 </head>
-<body class="bg-white text-green-900 font-sans">
-  <main class="max-w-4xl mx-auto p-6">
-    <h1 class="text-3xl font-bold mb-6">Your Cart</h1>
-    <div id="cart-items" class="space-y-4"></div>
-    <div class="flex justify-end mt-4 text-xl font-semibold">Total: <span id="cart-total" class="ml-2">$0.00</span></div>
-    <div id="paypal-button-container" class="mt-6"></div>
-  </main>
+<body>
+  <div class="container">
+    <h1>Checkout</h1>
+    <div class="summary">
+      <p class="muted">Order summary</p>
+      <p>Total: <strong id="display-total">—</strong></p>
+    </div>
+
+    <!-- PayPal Button -->
+    <div id="paypal-button-container"></div>
+
+    <p id="error"></p>
+  </div>
+
+  <!-- PayPal SDK: Client ID inserted below -->
+  <script src="https://www.paypal.com/sdk/js?client-id=5XH6S2AQV9ZB6&currency=USD"></script>
 
   <script>
-    const cart = JSON.parse(localStorage.getItem('cart')) || [];
-    const container = document.getElementById('cart-items');
-    const totalSpan = document.getElementById('cart-total');
+    // --- Utility: Get cart total by checking common places your site might store it ---
+    function getCartTotal() {
+      try {
+        // 1) If your site stores a JSON cart in localStorage under 'cart' or 'shoppingCart'
+        const possibleKeys = ['cart', 'shoppingCart', 'fabricaCart', 'cartItems'];
+        for (const k of possibleKeys) {
+          const raw = localStorage.getItem(k);
+          if (raw) {
+            try {
+              const parsed = JSON.parse(raw);
+              // common shapes: { total: 12.34 } or { items: [{price, qty}] }
+              if (typeof parsed.total === 'number' || typeof parsed.total === 'string') {
+                return Number(parsed.total).toFixed(2);
+              }
+              if (Array.isArray(parsed.items)) {
+                let sum = 0;
+                parsed.items.forEach(it => {
+                  const price = Number(it.price ?? it.unitPrice ?? 0);
+                  const qty = Number(it.qty ?? it.quantity ?? 1);
+                  sum += (price * qty);
+                });
+                if (!isNaN(sum) && sum > 0) return sum.toFixed(2);
+              }
+            } catch(e) { /* not JSON or unexpected shape */ }
+          }
+        }
 
-    function updateCart() {
-      container.innerHTML = "";
-      let total = 0;
+        // 2) If your site outputs an element with id="cart-total" or class="cart-total"
+        const elById = document.getElementById('cart-total');
+        if (elById) {
+          const val = elById.textContent.replace(/[^0-9.-]+/g, '');
+          if (val) return Number(val).toFixed(2);
+        }
+        const elByClass = document.querySelector('.cart-total, #total, .order-total');
+        if (elByClass) {
+          const val = elByClass.textContent.replace(/[^0-9.-]+/g, '');
+          if (val) return Number(val).toFixed(2);
+        }
 
-      cart.forEach(item => {
-        const itemTotal = item.price * item.qty;
-        total += itemTotal;
+        // 3) If cart items exist on the page with data-price attributes
+        const items = document.querySelectorAll('.cart-item[data-price]');
+        if (items && items.length) {
+          let sum = 0;
+          items.forEach(it => {
+            const price = Number(it.getAttribute('data-price') || 0);
+            const qty = Number(it.getAttribute('data-qty') || it.querySelector('.qty')?.textContent || 1);
+            sum += (price * qty);
+          });
+          if (!isNaN(sum) && sum > 0) return sum.toFixed(2);
+        }
+      } catch (err) {
+        console.error('getCartTotal error:', err);
+      }
 
-        const div = document.createElement('div');
-        div.className = "flex justify-between items-center border p-4 rounded";
-        div.innerHTML = \`
-          <span>\${item.name} (x\${item.qty})</span>
-          <span class="font-medium">\${itemTotal.toFixed(2)} USD</span>
-        \`;
-        container.appendChild(div);
-      });
-
-      totalSpan.innerText = "$" + total.toFixed(2);
-      return total.toFixed(2);
+      // fallback: a safe default — change this if you want a different default
+      return (20.00).toFixed(2);
     }
 
-    const finalTotal = updateCart();
+    // Render the total for user visibility
+    const total = getCartTotal();
+    document.getElementById('display-total').textContent = '$' + total;
 
+    // PayPal Buttons
     paypal.Buttons({
+      style: { layout: 'vertical', color: 'gold', shape: 'rect', label: 'pay' },
+
       createOrder: function(data, actions) {
+        // Disable further UI if needed
+        console.log('Creating order for total:', total);
         return actions.order.create({
           purchase_units: [{
             amount: {
-              value: finalTotal
+              value: total
             }
-          }]
+          }],
+          application_context: {
+            shipping_preference: 'NO_SHIPPING' // set to 'GET_FROM_FILE' if you collect shipping
+          }
         });
       },
+
       onApprove: function(data, actions) {
+        // Called when buyer approves the payment
+        console.log('Order approved, capturing...', data);
         return actions.order.capture().then(function(details) {
-          localStorage.removeItem('cart');
-          alert('Payment completed by ' + details.payer.name.given_name + '!');
-          window.location.href = "success.html";
+          console.log('Capture result', details);
+          // Optionally POST details to your server here (to record order)
+          // Example:
+          // fetch('/record-order', { method: 'POST', body: JSON.stringify(details) })
+
+          // Redirect to a simple thank you page
+          window.location.href = 'thank-you.html';
+        }).catch(function(err){
+          console.error('Capture error', err);
+          showError('Payment was approved but capturing failed. Check console for details.');
         });
+      },
+
+      onError: function(err) {
+        console.error('PayPal Buttons onError', err);
+        showError('An error occurred while initializing the payment. See console for details.');
+      },
+
+      onCancel: function(data) {
+        console.log('Payment cancelled', data);
+        // Optionally show a friendly message
+        showError('Payment canceled. You can try again or contact support.');
       }
     }).render('#paypal-button-container');
+
+    function showError(msg) {
+      const el = document.getElementById('error');
+      el.style.display = 'block';
+      el.textContent = msg;
+    }
+
+    // Small safety: if the button container doesn't render after 8s, show an error
+    setTimeout(() => {
+      const container = document.getElementById('paypal-button-container');
+      if (container && container.innerHTML.trim().length === 0) {
+        showError('Payment UI failed to load. Check browser console and ensure the PayPal SDK script is reachable.');
+      }
+    }, 8000);
   </script>
 </body>
 </html>
