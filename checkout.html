@@ -82,11 +82,15 @@
           if (!isNaN(sum) && sum > 0) return sum.toFixed(2);
         }
       } catch (err) {
-        console.error('getCartTotal error:', err);
-      }
+        function getCartTotal() {
+  const total = localStorage.getItem('cartTotal');
+  if (total && !isNaN(total)) {
+    return total;
+  }
+  // fallback if no cart total stored
+  return (20.00).toFixed(2);
+}
 
-      // fallback: a safe default — change this if you want a different default
-      return (20.00).toFixed(2);
     }
 
     // Render the total for user visibility
