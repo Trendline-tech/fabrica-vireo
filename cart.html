@@ -189,6 +189,92 @@
       window.location.href = 'checkout.html';
     }
     window.onload = renderCart;
-  </script>
+  <<script>
+  // Example cart item structure: { id: 'sku123', name: 'T-shirt', price: 15.99, qty: 1 }
+  const CART_KEY = 'cart';
+
+  // Load cart from localStorage or empty array
+  function loadCart() {
+    const raw = localStorage.getItem(CART_KEY);
+    return raw ? JSON.parse(raw) : [];
+  }
+
+  // Save cart to localStorage
+  function saveCart(cart) {
+    localStorage.setItem(CART_KEY, JSON.stringify(cart));
+  }
+
+  // Calculate total price
+  function calculateTotal(cart) {
+    return cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+  }
+
+  // Render cart items and total on the page
+  function renderCart() {
+    const cart = loadCart();
+    const cartContainer = document.getElementById('cart-items');
+    const totalEl = document.getElementById('cart-total');
+
+    if (!cartContainer || !totalEl) return;
+
+    if (cart.length === 0) {
+      cartContainer.innerHTML = '<p>Your cart is empty.</p>';
+      totalEl.textContent = '$0.00';
+      return;
+    }
+
+    // Render each item (basic example)
+    cartContainer.innerHTML = cart.map(item =>
+      `<div class="cart-item" data-id="${item.id}">
+        <span>${item.name}</span> —
+        <span>$${item.price.toFixed(2)}</span> ×
+        <input type="number" min="1" value="${item.qty}" data-id="${item.id}" class="qty-input" />
+      </div>`
+    ).join('');
+
+    // Update total
+    const total = calculateTotal(cart);
+    totalEl.textContent = '$' + total.toFixed(2);
+
+    // Save total in localStorage for checkout page
+    localStorage.setItem('cartTotal', total.toFixed(2));
+  }
+
+  // Handle quantity changes
+  document.addEventListener('input', (e) => {
+    if (e.target.classList.contains('qty-input')) {
+      const newQty = parseInt(e.target.value, 10);
+      const id = e.target.getAttribute('data-id');
+      if (newQty < 1 || isNaN(newQty)) return;
+
+      const cart = loadCart();
+      const item = cart.find(i => i.id === id);
+      if (item) {
+        item.qty = newQty;
+        saveCart(cart);
+        renderCart();
+      }
+    }
+  });
+
+  // Example: Adding items to cart (replace with your own UI)
+  function addToCart(newItem) {
+    const cart = loadCart();
+    const existing = cart.find(i => i.id === newItem.id);
+    if (existing) {
+      existing.qty += newItem.qty;
+    } else {
+      cart.push(newItem);
+    }
+    saveCart(cart);
+    renderCart();
+  }
+
+  // Initial render
+  document.addEventListener('DOMContentLoaded', () => {
+    renderCart();
+  });
+</script>
+>
 </body>
 </html>
